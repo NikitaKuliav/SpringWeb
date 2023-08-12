@@ -11,4 +11,6 @@ public interface EmployeeRespository {
     ArrayList<Employee> getEmployees();
     void addEmployee(Employee employee);
     Optional<Employee> getEmployee(int id);
+    void updateEmployee(int id, Employee employee);
+    void deleteEmployee(int id);
 }

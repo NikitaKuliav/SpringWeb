@@ -70,8 +70,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void update(int id, Employee employee) {
         Employee oldEmployee = employeeRespository.getEmployee(id)
                 .orElseThrow(()-> new EmployeeNotFoundException(id));
-        employeeRespository.getEmployee(id);
-        employeeRespository.addEmployee(employee);
+
+
+        employeeRespository.updateEmployee(id, employee);;
 
     }
 
@@ -84,10 +85,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void delete(int id) {
+        Employee oldEmployee = employeeRespository.getEmployee(id)
+                .orElseThrow(()-> new EmployeeNotFoundException(id));
+
+        employeeRespository.deleteEmployee(id);;
+
     }
 
     @Override
     public List<Employee> getHigherSalaryThan(int salary) {
-        return null;
+
+        List<Employee> employees = employeeRespository.getEmployees();
+        employees = employees.stream().
+                filter(employee -> employee.getSalary()>salary)
+                .toList();
+        return employees;
     }
 }
